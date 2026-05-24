@@ -1,0 +1,27 @@
+function parse_content(content):
+  function parse_dial(s):
+    let turns = string__slice(s, 1, len(s) - 1) |> result__unwrap() |> int() in
+    let direction = string__slice(s, 0, 1) |> result__unwrap() in
+    match direction: "L" -> -turns | "R" -> turns
+  in
+  let instructions = string__split(content, "\n") in
+  list__map(parse_dial, instructions)
+
+
+function part1(instructions):
+  function rotate_dial(dial, instructions, zero_count):
+    let zero_count =
+      match dial % 100: 0 -> zero_count + 1 | _ -> zero_count
+    in
+    match instructions:
+    | [] -> zero_count
+    | delta :: rest -> rotate_dial(dial + delta, rest, zero_count)
+  in
+  rotate_dial(50, instructions, 0)
+
+
+function main():
+  let! content = file__read_all("examples/aoc2025/day1.txt") in
+  let instructions = parse_content(content) in
+  println("part1: %d", part1(instructions));
+  println("part2: Idk how to do nicely...")
