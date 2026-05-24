@@ -21,7 +21,7 @@ function part1(instructions):
 
 
 function main():
-  let! content = file__read_all("examples/aoc2025/day1.txt") in
+  let! content = file__read_all("day1.txt") in
   let instructions = parse_content(content) in
   println("part1: %d", part1(instructions));
   println("part2: Idk how to do nicely...")
